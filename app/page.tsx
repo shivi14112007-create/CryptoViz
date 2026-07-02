@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/layout/Navbar";
-
+import Typewriter from "../components/layout/typewriter";
 export default function Home() {
   const categories = [
     {
@@ -24,6 +24,7 @@ export default function Home() {
         </svg>
       ),
       link: "/visualizer/caesar/",
+      glowClass: "hover:shadow-[0_0_25px_rgba(13,148,136,0.15)] dark:hover:shadow-[0_0_25px_rgba(20,184,166,0.15)]"
     },
     {
       title: "Symmetric Cryptosystems",
@@ -45,6 +46,7 @@ export default function Home() {
         </svg>
       ),
       link: "/visualizer/aes/",
+      glowClass: "hover:shadow-[0_0_25px_rgba(79,70,229,0.15)] dark:hover:shadow-[0_0_25px_rgba(99,102,241,0.15)]"
     },
     {
       title: "Secure Hash Functions",
@@ -66,6 +68,7 @@ export default function Home() {
         </svg>
       ),
       link: "/visualizer/sha256/",
+      glowClass: "hover:shadow-[0_0_25px_rgba(5,150,105,0.15)] dark:hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]"
     },
     {
       title: "Asymmetric Cryptography",
@@ -87,6 +90,7 @@ export default function Home() {
         </svg>
       ),
       link: "/visualizer/rsa/",
+      glowClass: "hover:shadow-[0_0_25px_rgba(225,29,72,0.15)] dark:hover:shadow-[0_0_25px_rgba(244,63,94,0.15)]"
     },
   ];
 
@@ -94,32 +98,42 @@ export default function Home() {
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 font-sans transition-colors duration-300">
       <Navbar />
 
-      {/* Hero Section */}
+     
       <section className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        {/* Decorative background glow */}
         <div className="absolute top-0 left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 stroke-zinc-200 [mask-image:radial-gradient(100%_100%_at_top,white,transparent)] dark:stroke-zinc-800">
           <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-indigo-500/10 blur-3xl" />
         </div>
 
         <div className="mx-auto max-w-5xl text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-5xl lg:text-6xl">
-            Interact with Cryptography,{" "}
-            <span className="bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent dark:from-teal-400 dark:to-indigo-450">
-              Visualised in Real-Time
-            </span>
-          </h1>
+  <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-5xl lg:text-6xl">
+    
+    <span className="block mb-2">Interact with Cryptography,</span>
+    
+    
+    <span className="block text-teal-600 dark:text-teal-400 min-h-[1.2em] sm:min-h-[1.5em]">
+      <Typewriter 
+        words={[
+          "Visualised in Real-Time.",
+          "Made Simple.",
+          "Explore the World of Cryptography."
+        ]}
+      />
+    </span>
+  </h1>
+  
+  
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Looking for a starting point or more instructions? Head over to{" "}
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://vercel.com/templates?framework=next.js"
+              className="font-medium text-zinc-950 dark:text-zinc-50 hover:underline"
             >
               Templates
             </a>{" "}
             or the{" "}
             <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://nextjs.org/learn"
+              className="font-medium text-zinc-950 dark:text-zinc-50 hover:underline"
             >
               Learning
             </a>{" "}
@@ -129,7 +143,7 @@ export default function Home() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/visualizer/caesar/"
-              className="rounded-lg bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-400"
+              className="rounded-lg bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-400 hover:scale-[1.02]"
             >
               Open Interactive Playground
             </Link>
@@ -137,7 +151,7 @@ export default function Home() {
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-800 shadow-sm transition-all hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              className="rounded-lg border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-800 shadow-sm transition-all hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 hover:scale-[1.02]"
             >
               View Documentation
             </a>
@@ -151,7 +165,7 @@ export default function Home() {
           {categories.map((cat, idx) => (
             <div
               key={idx}
-              className="group relative flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-zinc-850 dark:bg-zinc-900/40"
+              className={`group relative flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 dark:border-zinc-850 dark:bg-zinc-900/40 ${cat.glowClass}`}
             >
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-50 dark:bg-zinc-950/50">
@@ -170,7 +184,8 @@ export default function Home() {
                   href={cat.link}
                   className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
                 >
-                  Explore Category &rarr;
+                  Explore Category 
+                  <span className="ml-1 transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
                 </Link>
               </div>
             </div>
