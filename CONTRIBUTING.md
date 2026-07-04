@@ -40,22 +40,22 @@ Follow these steps to set up your local development environment:
 
 2. **Install node dependencies**:
    ```bash
-   pnpm install
+   npm install
    ```
 
 3. **Verify your local installation**:
    Run the unit tests to ensure your starting environment is correct:
    ```bash
-   pnpm test
+   npm test
    ```
    Verify that the static export build succeeds:
    ```bash
-   pnpm build
+   npm build
    ```
 
 4. **Start the development server**:
    ```bash
-   pnpm dev
+   npm dev
    ```
 
 Open `http://localhost:3000` in your browser. You are ready to start coding.
@@ -84,10 +84,10 @@ We follow a strict Test-Driven Development (TDD) cycle for cipher implementation
 4. **Verify Quality Gates**:
    Run the formatting, typechecking, and testing scripts locally:
    ```bash
-   pnpm lint
-   pnpm typecheck
-   pnpm test
-   pnpm build
+   npm lint
+   npm typecheck
+   npm test
+   npm build
    ```
 
 5. **Submit Pull Request**:
@@ -132,7 +132,7 @@ Open `app/visualizer/[cipher]/page.tsx` and ensure that your new cipher slug is 
 ### Step 7: Run Final Verification
 Verify your implementation passes all compilation check gates:
 ```bash
-pnpm lint && pnpm typecheck && pnpm test && pnpm build
+npm lint && npm typecheck && npm test && npm build
 ```
 
 ### Step 8: Verify Performance Budgets
