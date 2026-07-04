@@ -41,7 +41,9 @@ interface WorkerResponse {
   error?: string
 }
 
-self.addEventListener('message', (event: MessageEvent<WorkerRequest>) => {
+const workerScope = self as unknown as Worker
+
+workerScope.addEventListener('message', (event: MessageEvent<WorkerRequest>) => {
   const { id, action, cipherId, input, key, options } = event.data
 
   try {
@@ -149,13 +151,13 @@ self.addEventListener('message', (event: MessageEvent<WorkerRequest>) => {
         throw new Error(`Unsupported cipher ID: ${cipherId}`)
     }
 
-    self.postMessage({
+    workerScope.postMessage({
       id,
       success: true,
       result,
     })
   } catch (error: any) {
-    self.postMessage({
+    workerScope.postMessage({
       id,
       success: false,
       error: error?.message || String(error),
