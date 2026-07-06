@@ -1,12 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/next"
 import Navbar from "../components/layout/Navbar";
 import Typewriter from "../components/layout/typewriter";
 import SkeletonCard from "../components/ui/SkeletonCard";
 
 export default function Home() {
-  const isLoading = true;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const categories = [
     {
       title: "Classical Ciphers",
