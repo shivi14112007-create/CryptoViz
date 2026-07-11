@@ -39,7 +39,7 @@ describe('Playfair Cipher Unit Tests', () => {
       fc.property(
         fc.string({ minLength: 2, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z]/g, '') + 'ab'),
         fc.string({ minLength: 1, maxLength: 20 }).map(s => s.replace(/[^a-zA-Z]/g, '') + 'a'),
-        (input, key) => {
+        (input: string, key: string) => {
           const enc = encrypt(input, key)
           const dec = decrypt(enc.output, key)
           // Since decrypt returns uppercase prepared plaintext:
