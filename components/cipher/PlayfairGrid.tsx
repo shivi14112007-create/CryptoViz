@@ -24,44 +24,15 @@ export default function PlayfairGrid({ matrix, highlights = [] }: PlayfairGridPr
 
   // Derived (not stored) so a shrinking grid can never leave focusedIndex
   // pointing at a cell that no longer exists — no effect/setState needed.
-  const maxIndex = Math.max(grid.length * 5 - 1, 0)
+  const isValidGrid =
+    grid.length === 5 &&
+    grid.every((row) => row.length === 5) &&
+    (typeof matrix !== 'string' || matrix.length === 25)
+
+  if (!isValidGrid) return null
+
+  const maxIndex = 24
   const clampedFocusedIndex = Math.min(focusedIndex, maxIndex)
-
-  if (!matrix) return null
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>, rIdx: number, cIdx: number) => {
-    let nextRow = rIdx
-    let nextCol = cIdx
-
-    switch (event.key) {
-      case 'ArrowRight':
-        nextCol = Math.min(cIdx + 1, 4)
-        break
-      case 'ArrowLeft':
-        nextCol = Math.max(cIdx - 1, 0)
-        break
-      case 'ArrowDown':
-        nextRow = Math.min(rIdx + 1, grid.length - 1)
-        break
-      case 'ArrowUp':
-        nextRow = Math.max(rIdx - 1, 0)
-        break
-      case 'Home':
-        nextRow = 0
-        nextCol = 0
-        break
-      case 'End':
-        nextRow = grid.length - 1
-        nextCol = 4
-        break
-      default:
-        return
-    }
-
-    event.preventDefault()
-    const nextIndex = nextRow * 5 + nextCol
-    setFocusedIndex(nextIndex)
-    cellRefs.current[nextIndex]?.focus()
   }
 
   return (
