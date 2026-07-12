@@ -1,17 +1,23 @@
-"use client";
+'use client'
 
-import { useState, useEffect, useRef } from "react";
-import type { CipherDefinition } from "../../lib/cipher/registry";
-import { useCipherWorker } from "../../lib/hooks/useCipherWorker";
-import StepAnimator from "./StepAnimator";
-import type { AnimationSpeed } from "./StepAnimator";
-import WorkspacePresetManager from "./WorkspacePresetManager";
-import type { WorkspacePreset } from "../../lib/utils/workspacePresets";
-import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
+import type { CipherDefinition } from '../../lib/cipher/registry'
+import type { CipherResult } from '../../lib/cipher/types'
+import { useCipherWorker } from '../../lib/hooks/useCipherWorker'
+import type { AnimationSpeed } from './StepAnimator'
+import WorkspacePresetManager from './WorkspacePresetManager'
+import type { WorkspacePreset } from '../../lib/utils/workspacePresets'
+import TraceTransferControls from './TraceTransferControls'
+import {
+  traceToCipherResult,
+  type CipherTraceFile,
+} from '../../lib/utils/cipherTrace'
 
-const PlayfairGrid = dynamic(() => import("./PlayfairGrid"), { ssr: false });
-const RailFenceViz = dynamic(() => import("./RailFenceViz"), { ssr: false });
-const DHVisualizer = dynamic(() => import("./DHVisualizer"), { ssr: false });
+const StepAnimator = dynamic(() => import('./StepAnimator'), { ssr: false })
+const PlayfairGrid = dynamic(() => import('./PlayfairGrid'), { ssr: false })
+const RailFenceViz = dynamic(() => import('./RailFenceViz'), { ssr: false })
+const DHVisualizer = dynamic(() => import('./DHVisualizer'), { ssr: false })
 
 interface CipherLayoutProps {
   cipher: CipherDefinition;
@@ -61,7 +67,7 @@ export default function CipherLayout({ cipher }: CipherLayoutProps) {
   const [demoMode, setDemoMode] = useState(true);
   const [bobSecret, setBobSecret] = useState("15");
 
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<CipherResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [animationSpeed, setAnimationSpeed] = useState<AnimationSpeed>(1);
@@ -241,6 +247,32 @@ export default function CipherLayout({ cipher }: CipherLayoutProps) {
     }
   };
 
+  const handleTraceImport = (trace: CipherTraceFile) => {
+    // Loading a trace only updates local UI state. It does not call runCipher().
+    setAutoCompute(false);
+    setInput(trace.input);
+    setKey(trace.key);
+    setAction(trace.direction);
+
+    if (typeof trace.options.hexInput === "boolean") {
+      setHexInput(trace.options.hexInput);
+    }
+    if (typeof trace.options.rounds === "number") {
+      setRounds(trace.options.rounds);
+    }
+    if (typeof trace.options.demoMode === "boolean") {
+      setDemoMode(trace.options.demoMode);
+    }
+    if (typeof trace.options.bobSecret === "string") {
+      setBobSecret(trace.options.bobSecret);
+    }
+
+    setResult(traceToCipherResult(trace));
+    setCurrentStep(0);
+    setActiveTab("result");
+    setError(null);
+  };
+
   // Auto-run with debounce when computation inputs change
   useEffect(() => {
     if (!autoCompute) return;
@@ -293,6 +325,13 @@ export default function CipherLayout({ cipher }: CipherLayoutProps) {
     }
 
     return null;
+  };
+
+  const traceOptions: Record<string, unknown> = {
+    hexInput,
+    rounds,
+    demoMode,
+    bobSecret,
   };
 
   return (
@@ -606,6 +645,16 @@ export default function CipherLayout({ cipher }: CipherLayoutProps) {
                   </div>
                 )}
               </div>
+
+              <TraceTransferControls
+                cipherId={cipher.id}
+                direction={cipher.id === "dh" ? "encrypt" : action}
+                input={input}
+                cipherKey={key}
+                options={traceOptions}
+                result={result}
+                onImport={handleTraceImport}
+              />
 
               {/* Custom Visualizer rendering (like grids, paint mixer, etc.) */}
               {renderSpecificVisualizer()}
