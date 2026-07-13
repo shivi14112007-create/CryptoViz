@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+
 
 :root {
   --background: #FAFAFA;
@@ -78,4 +78,24 @@
 :root {
   --scrollbar-thumb: #009689;
   --scrollbar-thumb-hover: #04877c;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes ambientGlow {
+  0%,100%{
+    transform:translateY(-50%) scale(1);
+  }
+
+  50%{
+    transform:translateY(-50%) scale(1.12);
+  }
 }

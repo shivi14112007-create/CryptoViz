@@ -44,14 +44,13 @@ export default function Typewriter({
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, currentWordIndex, words, typingSpeed, deletingSpeed, delayBetweenWords]);
 
-  return (
-    <span className="inline-flex items-center justify-center text-center min-h-[1.2em] w-full">
-     
-      <span className="bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent dark:from-teal-400 dark:to-indigo-400">
-        {currentText}
-      </span>
-      {/* Separate cursor so it doesn't get masked out by the text gradient */}
-      <span className="ml-1 inline-block w-[3px] h-[1em] bg-teal-600 dark:bg-teal-400 animate-pulse align-middle" />
+ return (
+  <span className="inline-flex items-center min-h-[1.2em]">
+    <span className="bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent dark:from-teal-400 dark:to-indigo-400">
+      {currentText}
     </span>
-  );
+
+    <span className="ml-1 inline-block h-[1em] w-[3px] animate-pulse bg-teal-600 align-middle dark:bg-teal-400" />
+  </span>
+);
 }

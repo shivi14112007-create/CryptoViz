@@ -1,5 +1,5 @@
 "use client";
-
+import HeroIllustration from "@/components/HeroIllustration";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -7,6 +7,13 @@ import { Analytics } from "@vercel/analytics/next"
 import Navbar from "../components/layout/Navbar";
 import Typewriter from "../components/layout/typewriter";
 import SkeletonCard from "../components/ui/SkeletonCard";
+import {
+  Shield,
+  Lock,
+  KeyRound,
+  Cpu,
+} from "lucide-react";
+import { Zap, ShieldCheck, BookOpen } from "lucide-react";
 
 import Footer from "../components/layout/footer";
 export default function Home() {
@@ -117,89 +124,149 @@ export default function Home() {
 
       <Analytics />
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute top-0 left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 stroke-zinc-200 [mask-image:radial-gradient(100%_100%_at_top,white,transparent)] dark:stroke-zinc-800">
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-indigo-500/10 blur-3xl animate-hero-float" />
+      <section className="relative overflow-hidden bg-zinc-50 dark:bg-[#060816]">
+
+        {/* Full Hero Ambient Glow */}
+
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+
+          {/* Left Cyan */}
+          <div className="absolute -left-72 top-1/2 h-[850px] w-[850px] -translate-y-1/2 rounded-full bg-cyan-400/20 blur-[180px] animate-[ambientGlow_10s_ease-in-out_infinite]"></div>
+
+          {/* Right Purple */}
+          <div className="absolute -right-72 top-1/2 h-[850px] w-[850px] -translate-y-1/2 rounded-full bg-violet-500/20 blur-[180px] animate-[ambientGlow_12s_ease-in-out_infinite_reverse]" />
+
+          {/* Center Blue */}
+          <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-400/10 blur-[150px]" />
+
         </div>
 
-        <div className="mx-auto max-w-5xl text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-5xl lg:text-6xl">
+        {/* Border Glow */}
+        <div className="pointer-events-none absolute inset-0 rounded-[40px] border border-cyan-500/10 shadow-[0_0_120px_rgba(34,211,238,0.12)]" />
+        {/* Background Glow */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-[220px] animate-pulse" />
 
-            <span className="block mb-2">Interact with Cryptography,</span>
+          {/* Left Glow */}
+          <div className="absolute -left-56 top-20 h-[520px] w-[520px] rounded-full bg-cyan-500/20 blur-[180px]" />
 
+          {/* Right Glow */}
+          <div className="absolute -right-56 top-0 h-[520px] w-[520px] rounded-full bg-violet-500/20 blur-[180px]" />
 
-            <span className="block text-teal-600 dark:text-teal-400 min-h-[1.2em] sm:min-h-[1.5em]">
-              <Typewriter
-                words={[
-                  "Visualised in Real-Time.",
-                  "Made Simple.",
-                  "Explore the World of Cryptography."
-                ]}
-              />
-            </span>
-          </h1>
-
-
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js"
-              className="font-medium text-zinc-950 dark:text-zinc-50 hover:underline"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn"
-              className="font-medium text-zinc-950 dark:text-zinc-50 hover:underline"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/visualizer/caesar/"
-              className="rounded-lg bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-teal-500 dark:bg-teal-500 dark:hover:bg-teal-400 hover:scale-[1.02]"
-            >
-              Open Interactive Playground
-            </Link>
-            <a
-              href="/docs"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-lg border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-zinc-800 shadow-sm transition-all hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 hover:scale-[1.02]"
-            >
-              View Documentation
-            </a>
-          </div>
-        </div>
-        <div className="mt-10 mx-auto grid max-w-3xl grid-cols-1 gap-4 text-center sm:grid-cols-3">
-          <div>
-            <h3 className="text-lg font-semibold text-teal-400">⚡ Interactive</h3>
-            <p className="text-sm text-zinc-800 dark:text-zinc-400">
-              Live cryptography playground
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold text-teal-400">🔐 Secure</h3>
-            <p className="text-sm text-zinc-800 dark:text-zinc-400">
-              Explore modern cryptographic algorithms
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold text-teal-400">📚 Learn</h3>
-            <p className="text-sm text-zinc-800 dark:text-zinc-400">
-              Interactive documentation and resources
-            </p>
-          </div>
+          {/* Bottom Glow */}
+          <div className="absolute left-1/2 bottom-0 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-teal-500/10 blur-[160px]" />
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage: `
+          linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px)
+        `,
+              backgroundSize: "60px 60px",
+            }}
+          />
         </div>
 
+        <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-20 lg:px-8">
 
-      </section >
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_520px]">
+
+            {/* LEFT */}
+
+            <div>
+
+              <div className="inline-flex items-center rounded-full border border-teal-500/30 bg-purple-500/10 px-4 py-2 text-sm font-medium text-purple-300">
+                ⚡ Interactive Cryptography Playground
+              </div>
+
+              <div className="absolute left-10 top-24 h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+
+              <div className="absolute left-72 top-40 h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
+
+              <div className="absolute left-56 top-80 h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />
+
+              <h1 className="mt-7 text-5xl font-black leading-[0.95] tracking-tight text-zinc-900 dark:text-white lg:text-5xl">
+
+                Interact with
+
+                <span className="block mt-2">
+                  Modern
+                </span>
+
+                <span className="block w-fit bg-gradient-to-r from-cyan-300 via-teal-300 to-violet-400 bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(56,189,248,.35)]">
+                  Cryptography
+                </span>
+
+              </h1>
+
+              <div className="mt-3 flex min-h-[30px] text-2xl font-semibold">
+                <Typewriter
+                  words={[
+                    "Visualised in Real-Time.",
+                    "Learn by Experimenting.",
+                    "Explore Modern Algorithms."
+                  ]}
+                />
+              </div>
+
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+                Learn encryption, hashing and secure communication through
+                beautiful interactive visualisations designed for students,
+                developers and security enthusiasts.
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+
+                <Link
+                  href="/visualizer/caesar/"
+                  className="rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 px-7 py-4 font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:scale-105"
+                >
+                  Open Playground →
+                </Link>
+
+                <a
+                  href="/docs"
+                  className="rounded-xl border border-zinc-700 bg-zinc-900/60 px-8 py-4 text-lg font-semibold text-white backdrop-blur transition-all duration-300 hover:border-cyan-500 hover:bg-zinc-800"
+                >
+                  Documentation
+                </a>
+
+              </div>
+
+              <div className="mt-14 grid grid-cols-3 gap-4">
+
+                <div className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400/40 hover:bg-white/10 hover:shadow-[0_0_35px_rgba(34,211,238,.18)]">
+                  <h3 className="text-lg font-semibold text-white"><Zap className="mb-4 text-cyan-400" size={22} /> Interactive</h3>
+                  <p className="mt-2 text-sm text-zinc-500">
+                    Live playground
+                  </p>
+                </div>
+
+                <div className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400/40 hover:bg-white/10 hover:shadow-[0_0_35px_rgba(34,211,238,.18)]">
+                  <h3 className="text-lg font-semibold text-white"><ShieldCheck className="mb-4 text-cyan-400" size={22} /> Secure</h3>
+                  <p className="mt-2 text-sm text-zinc-500">
+                    Modern algorithms
+                  </p>
+                </div>
+
+                <div className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400/40 hover:bg-white/10 hover:shadow-[0_0_35px_rgba(34,211,238,.18)]">
+                  <h3 className="text-lg font-semibold text-white"><BookOpen className="mb-4 text-cyan-400" size={22} /> Learn</h3>
+                  <p className="mt-2 text-sm text-zinc-500">
+                    Step-by-step
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+            {/* RIGHT  */}
+            <div className="relative -translate-y-8 flex items-center justify-center">
+
+              <HeroIllustration />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Categories Grid */}
       < section className="mx-auto max-w-5xl py-12 px-4 sm:px-6 lg:px-8" >
@@ -223,7 +290,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="mt-6 border-t border-zinc-100 pt-4 dark:border-zinc-850">
+                <div className="mt-3 border-t border-zinc-100 pt-4 dark:border-zinc-850">
                   <Link
                     href={cat.link}
                     className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
