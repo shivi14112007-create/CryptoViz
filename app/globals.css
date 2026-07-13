@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+
 
 :root {
   --background: #FAFAFA;
@@ -23,6 +23,20 @@
   40% { transform: translateX(4px); }
   60% { transform: translateX(-3px); }
   80% { transform: translateX(3px); }
+}
+
+@keyframes heroFloat {
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-hero-float {
+  animation: heroFloat 8s ease-in-out infinite;
 }
 
 /* Custom global styles */
@@ -64,6 +78,24 @@
   --scrollbar-thumb: #009689;
   --scrollbar-thumb-hover: #04877c;
 }
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes ambientGlow {
+  0%,100%{
+    transform:translateY(-50%) scale(1);
+  }
+
+  50%{
+    transform:translateY(-50%) scale(1.12);
 
 /* Smooth, consistent transitions for every interactive element */
 a,
