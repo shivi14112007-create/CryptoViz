@@ -5,6 +5,9 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import type { CipherDefinition } from '../../lib/cipher/registry'
 import { useCipherWorker } from '../../lib/hooks/useCipherWorker'
+import TraceTransferControls from './TraceTransferControls'
+import { traceToCipherResult, type CipherTraceFile } from '../../lib/utils/cipherTrace'
+import type { CipherResult } from '../../lib/cipher/types'
 const StepAnimator = dynamic(() => import('./StepAnimator'), { ssr: false })
 const PlayfairGrid = dynamic(() => import('./PlayfairGrid'), { ssr: false })
 const RailFenceViz = dynamic(() => import('./RailFenceViz'), { ssr: false })
@@ -645,4 +648,4 @@ export default function CipherLayout({ cipher }: CipherLayoutProps) {
       </div>
     </div>
   )
-})
+}
